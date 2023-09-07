@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .calculator {
+            width: 200px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px black #ccc;
+            border-radius: 10px;
+            text-align: center;
+            color: blue;
+            background-color: cyan;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 35px;
+            margin: 6px;
+            text-align: center;
+        
+        }
+        #A{
+            color: red;
+        }
+        #B{
+            color: green;
+        }
+        #C{
+            color: skyblue;
+        }
+        #D{
+            color: purple;
+        }
+        #E{
+            color: violet;
+        }
+        #F{
+            color: yellow;
+        }
+        #G{
+            color: orange;
+        }
+        #H{
+            color: teal;
+        }
+        #I{
+            color: gold;
+        }
+        #J{
+            color: magenta;
+        }
+        #K{
+            color: coral;
+        }
+        #L{
+            color: brown;
+        }
+        #M{
+            color: olive;
+        }
+        #N{
+            color: chocolate;
+        }
+        #equal{
+            color: maroon;
+        }
+        #clear{
+            color: navy;
+        }
+        #O{
+            color: darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1 id="display">0</h1>
+        <div class="keypad">
+            <button id="A">1</button> 
+            <button id="B">2</button>
+            <button id="c">3</button>
+            <button id="D">4</button>
+            <button id="E">5</button>
+            <button id="F">6</button>
+            <button id="G">7</button>
+            <button id="H">8</button>
+            <button id="I">9</button>
+            <button id="J">0</button>
+            <button id="O">.</button> 
+            <span class="operator">
+                <button id="K">+</button>
+                <button id="L">-</button>
+                <button id="M">*</button>
+                <button id="N">/</button>
+            </span>
+        </div>
+        <div>
+        <button id="equal">=</button>
+        <button id="clear">C</button> 
+    </div>
+
+    <script>
+        let keypadButton = document.querySelectorAll(".keypad > button");
+        let operatorButton = document.querySelectorAll(".operator > button");
+        let equal = document.getElementById("equal");
+        let clear = document.getElementById("clear");
+        let heading = document.getElementById("display");
+
+        let firstNumber = "";
+        let secondNumber = "";
+        let IsFirstNumber = true;
+        let operators = "";
+
+        equal.addEventListener("click", function () {
+            heading.innerText = calculate(firstNumber, secondNumber, operators);
+        });
+
+        clear.addEventListener("click", function () {
+            firstNumber = "";
+            secondNumber = "";
+            IsFirstNumber = true;
+            operators = "";
+            heading.innerText = "0";
+        });
+
+        for (let i = 0; i < keypadButton.length; i++) {
+            keypadButton[i].addEventListener("click", function () {
+                if (IsFirstNumber == true) {
+                    firstNumber += keypadButton[i].innerText;
+                    heading.innerText = firstNumber;
+                } else {
+                    secondNumber += keypadButton[i].innerText;
+                    heading.innerText = secondNumber;
+                }
+            });
+        }
+
+        for (let i = 0; i < operatorButton.length; i++) {
+            operatorButton[i].addEventListener("click", function () {
+                IsFirstNumber = false;
+                operators = operatorButton[i].innerText;
+            });
+        }
+
+        function calculate(firstNumber, secondNumber, operators) {
+            switch (operators) {
+                case "+":
+                    return (Number(firstNumber) + Number(secondNumber)).toFixed(2); 
+
+                case "-":
+                    return (Number(firstNumber) - Number(secondNumber)).toFixed(2);
+
+                case "*":
+                    return (Number(firstNumber) * Number(secondNumber)).toFixed(2);
+
+                case "/":
+                    if (Number(secondNumber) === 0) {
+                        return "Undefined"; 
+                    }
+                    return (Number(firstNumber) / Number(secondNumber)).toFixed(2);
+
+                default:
+                    return "0";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Practise Selectors</title>
+    <style>
+      .red {
+        color: red;
+      }
+      .green {
+        color: green;
+      }
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>First H1</h1>
+    <h1>Second H1</h1>
+    <h3>First H3</h3>
+    <h3>Second H3</h3>
+    <h5>First H5</h5>
+    <h5>Second H5</h5>
+    <h5>Third H5</h5>
+    <div class="green">First DIV</div>
+    <div class="red">Second DIV</div>
+    <div class="blue">Third DIV</div>
+    <p class="green">First P</p>
+    <p class="red">Second P</p>
+    <p class="blue">Third P</p>
+    <hr />
+    <button onClick="changeH1()">Change H1</button>
+    <button onClick="changeH3()">Change H3</button>
+    <button onClick="changeH5()">Change H5</button>
+    <button onClick="changeGreen()">Change Green</button>
+    <button onClick="changeRed()">Change Red</button>
+    <button onClick="changeBlue()">Change Blue</button>
+    <script>
+      function changeH1() {
+        const h1Elements = document.querySelectorAll("h1");
+        h1Elements.forEach((element) => {
+          element.classList.add("red");
+        });
+      }
+
+      function changeH3() {
+        const h3Elements = document.querySelectorAll("h3");
+        h3Elements.forEach((element) => {
+          element.classList.add("green");
+        });
+      }
+
+      function changeH5() {
+        const h5Elements = document.querySelectorAll("h5");
+        h5Elements.forEach((element) => {
+          element.classList.add("blue");
+        });
+      }
+
+      function changeGreen() {
+        const greenElements = document.querySelectorAll(".green");
+        greenElements.forEach((element) => {
+          element.classList.add("green");
+        });
+      }
+
+      function changeRed() {
+        const redElements = document.querySelectorAll(".red");
+        redElements.forEach((element) => {
+          element.classList.add("red");
+        });
+      }
+
+      function changeBlue() {
+        const blueElements = document.querySelectorAll(".blue");
+        blueElements.forEach((element) => {
+          element.classList.add("blue");
+        });
+      }
+    </script>
+  </body>
+</html>

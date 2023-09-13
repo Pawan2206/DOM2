@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Hospital - Doctor Records</title>
+</head>
+<script>
+    #body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+#container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table th {
+    background-color: #f0f0f0;
+}
+
+table td button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+</script>
+<body>
+    <div class="container">
+        <h1>Hospital - Doctor Records</h1>
+        <form id="doctor-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+
+            <label for="doctor-id">Doctor ID:</label>
+            <input type="text" id="doctor-id" required><br>
+
+            <label for="specialization">Specialization:</label>
+            <select id="specialization" required>
+                <option value="Dermatologist">Dermatologist</option>
+                <option value="ENT">ENT</option>
+                <option value="Dentist">Dentist</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="COVID">COVID</option>
+            </select><br>
+
+            <label for="experience">Experience (in years):</label>
+            <input type="number" id="experience" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" required><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Doctor ID</th>
+                    <th>Specialization</th>
+                    <th>Experience</th>
+                    <th>Email</th>
+                    <th>Mobile Number</th>
+                    <th>Role</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <script>
+     document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("doctor-form");
+  const table = document.querySelector("table tbody");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.querySelector("#name").value;
+    const doctorID = document.querySelector("#doctor-id").value;
+    const specialization = document.querySelector("#specialization").value;
+    const experience = parseInt(document.querySelector("#experience").value);
+    const email = document.querySelector("#email").value;
+    const mobile = document.querySelector("#mobile").value;
+
+    const role = getRole(experience);
+
+    if (name && doctorID && specialization && experience && email && mobile) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>${doctorID}</td>
+        <td>${specialization}</td>
+        <td>${experience}</td>
+        <td>${email}</td>
+        <td>${mobile}</td>
+        <td>${role}</td>
+        <td><button class="delete-button">Delete</button></td>
+      `;
+
+      table.appendChild(row);
+
+      // Clear the form inputs
+      form.reset();
+
+      // Add a click event listener to the delete button
+      const deleteButton = row.querySelector(".delete-button");
+      deleteButton.addEventListener("click", function () {
+        table.removeChild(row);
+      });
+    } else {
+      alert("Please fill in all fields.");
+    }
+  });
+
+  function getRole(experience) {
+    if (experience > 5) {
+      return "Senior";
+    } else if (experience >= 2) {
+      return "Junior";
+    } else {
+      return "Trainee";
+    }
+  }
+});
+   
+    </script>
+</body>
+</html>

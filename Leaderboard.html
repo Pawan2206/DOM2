@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #score {
+            font-size: 36px;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .button-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+        }
+
+        .button {
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        #enter-button {
+            background-color: #28a745;
+        }
+
+        #enter-button:hover {
+            background-color: #1e7e34;
+        }
+
+        .score-label {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        .score {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leaderboard</h1>
+        <input type="text" id="score" readonly>
+        <div class="button-container">
+            <button class="button" onclick="appendToScore(1)">1</button>
+            <button class="button" onclick="appendToScore(2)">2</button>
+            <button class="button" onclick="appendToScore(3)">3</button>
+            <button class="button" onclick="appendToScore(4)">4</button>
+            <button class="button" onclick="appendToScore(5)">5</button>
+            <button class="button" onclick="appendToScore(6)">6</button>
+            <button class="button" onclick="appendToScore(7)">7</button>
+            <button class="button" onclick="appendToScore(8)">8</button>
+            <button class="button" onclick="appendToScore(9)">9</button>
+            <button class="button" id="enter-button" onclick="updateMinMax()">ENTER</button>
+        </div>
+        <div class="score-label">MIN: <span class="score" id="min">-</span></div>
+        <div class="score-label">MAX: <span class="score" id="max">-</span></div>
+    </div>
+
+    <script>
+        let currentScore = '';
+        let minScore = null;
+        let maxScore = null;
+
+        function appendToScore(num) {
+            currentScore += num;
+            document.getElementById('score').value = currentScore;
+        }
+
+        function updateMinMax() {
+            const score = parseInt(currentScore);
+            if (minScore === null || score < minScore) {
+                minScore = score;
+                document.getElementById('min').textContent = minScore;
+            }
+            if (maxScore === null || score > maxScore) {
+                maxScore = score;
+                document.getElementById('max').textContent = maxScore;
+            }
+            currentScore = '';
+            document.getElementById('score').value = '';
+        }
+    </script>
+</body>
+</html>
